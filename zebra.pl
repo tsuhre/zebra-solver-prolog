@@ -30,7 +30,13 @@ solve(Houses) :-
 
     % Kools are smoked in the yellow house.
     member(house(yellow,_,_,_,kools), Houses),
-    
+
+    % Milk is drunk in the middle house.
+    nth1(3, Houses, house(_,_,_,milk,_)),
+
+    % The Norwegian lives in the first house.
+    nth1(1, Houses, house(_,norwegian,_,_,_)),
+
     % The Lucky Strike smoker drinks orange juice.
     member(house(_,_,_,orangejuice,luckystrikes), Houses),
 
