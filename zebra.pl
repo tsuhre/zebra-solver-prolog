@@ -1,5 +1,11 @@
 emptyHouse(house(_,_,_,_,_)).
 
+% Helper function which determines whether list items A and B are in the left-to-right order A, B
+order(A, B, List) :-
+    nth1(N1, List, A),
+    N2 is N1 + 1,
+    nth1(N2, List, B).
+
 solve(Houses) :-
     /*
     There are 5 houses in a row, each a different color.
@@ -24,6 +30,9 @@ solve(Houses) :-
 
     % The Ukrainian drinks tea.
     member(house(_,ukranian,_,tea,_), Houses),
+
+    % The green house is immediately to the right of the ivory house.
+    order(house(ivory,_,_,_,_), house(green,_,_,_,_), Houses),
 
     % The Old Gold smoker owns snails.
     member(house(_,_,snails,_,oldgolds), Houses),
