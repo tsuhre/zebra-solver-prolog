@@ -90,3 +90,11 @@ report(Houses) :-
     
     % Print horizontal line
     format("-------------------------------------------------------------------~n").
+
+% Gets the nationality of the water drinker as a variable
+waterDrinker(Houses, Nat) :-
+    member(house(_,Nat,_,water,_), Houses).
+
+% Gets the nationality of the zebra owner as a variable
+zebraOwner(Houses, Nat) :-
+    member(house(_,Nat,zebra,_,_), Houses).
