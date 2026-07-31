@@ -1,10 +1,14 @@
 emptyHouse(house(_,_,_,_,_)).
 
-% Helper function which determines whether list items A and B are in the left-to-right order A, B
+% Helper function which determines whether list items A and B are in consecutive left-to-right order A, B
 order(A, B, List) :-
     nth1(N1, List, A),
     N2 is N1 + 1,
     nth1(N2, List, B).
+
+% Helper function which determines whether list items A and B are next to each other
+nextTo(A, B, List) :-
+    order(A, B, List) ; order(B, A, List).
 
 solve(Houses) :-
     /*
@@ -45,12 +49,21 @@ solve(Houses) :-
 
     % The Norwegian lives in the first house.
     nth1(1, Houses, house(_,norwegian,_,_,_)),
+    
+    % The Chesterfields smoker lives next to the man with the fox.
+    nextTo(house(_,_,_,_,chesterfields), house(_,_,fox,_,_), Houses),
+
+    % Kools are smoked in the house next to the house where the horse is kept.
+    nextTo(house(_,_,_,_,kools), house(_,_,horse,_,_), Houses),
 
     % The Lucky Strike smoker drinks orange juice.
     member(house(_,_,_,orangejuice,luckystrikes), Houses),
 
     % The Japanese smokes Parliaments.
     member(house(_,japanese,_,_,parliaments), Houses),
+    
+    % The Norwegian lives next to the blue house.
+    nextTo(house(_,norwegian,_,_,_), house(blue,_,_,_,_), Houses),
 
     % Who drinks water?
     % Tells the solver there exists a house in which water is drank.
