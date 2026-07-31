@@ -98,3 +98,11 @@ waterDrinker(Houses, Nat) :-
 % Gets the nationality of the zebra owner as a variable
 zebraOwner(Houses, Nat) :-
     member(house(_,Nat,zebra,_,_), Houses).
+
+% Single function which solves the zebra puzzle, displays the solution, and displays the answers to the original questions
+run :-
+    solve(Houses),
+    report(Houses),
+    waterDrinker(Houses, WaterDrinker),
+    zebraOwner(Houses, ZebraOwner),
+    format("~nThe ~w drinks water.~nThe ~w owns the zebra.~n", [WaterDrinker, ZebraOwner]).
