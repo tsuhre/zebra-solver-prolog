@@ -9,19 +9,19 @@ Prolog is a declarative language, as opposed to an imperative language. This mea
 
 ### `solve()`
 To solve the actual puzzle, all I had to do was define a system of "houses," which is just a list of five similar structures each with five blank attributes, and then give the clues to the program in code form. For example, instead of "The Englishman lives in the red house," I give the program this statement:
-```
+```prolog
 member(house(red,englishman,_,_,_), Houses)
 ```
 This statement basically tells the program that there exists a `house()` structure in the Houses list with attributes "red" and "englishman." A lot of the clues are similar to this one, but there are a few other kinds. For clues like "The Norwegian lives in the first house," the statement would be
-```
+```prolog
 nth1(1, Houses, house(_,norwegian,_,_,_))
 ```
 This tells the program that the `house()` structure at the 1st position in the Houses list has the second attribute "norwegian." I used `nth1()` instead of `nth0()` here to indicate to the program that I was using indexing starting at 1, not 0. Another kind of clue specifies positioning, such as "The green house is immediately to the right of the ivory house." The statement corresponding to this written as
-```
+```prolog
 order(house(ivory,_,_,_,_), house(green,_,_,_,_), Houses)
 ```
 This uses my helper function `order()` to tell the program that there is a `house()` with first attribute "ivory" that comes directly before a `house()` with first attribute "green." This is equivalent to saying that the green house is to the right of the ivory house. A very similar statement to this one is "The Norwegian lives next to the blue house." This one still deals with order, but does not specify which house comes first. The code for this statement is
-```
+```prolog
 nextTo(house(_,norwegian,_,_,_), house(blue,_,_,_,_), Houses)
 ```
 My `nextTo()` helper function uses my `order()` function twice to say that the houses could be in order AB or BA, as long as they are directly next to each other.
@@ -59,11 +59,11 @@ This also demonstrates the program's response to being prompted for another solu
 
 ## How to Run It
 To run this program, you must have SWI-Prolog installed. Then, in a terminal, navigate to the `zebra-solver-prolog` folder, and run the command
-```
+```bash
 swipl zebra.pl
 ```
 This runs the program in Prolog. Then, on the resulting command line `1 ?- `, run the command
-```
+```bash
 run.
 ```
 This will generate a solution to the puzzle and present it in the terminal.
