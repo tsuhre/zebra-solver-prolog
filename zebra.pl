@@ -10,6 +10,7 @@ order(A, B, List) :-
 nextTo(A, B, List) :-
     order(A, B, List) ; order(B, A, List).
 
+% Solves the zebra puzzle
 solve(Houses) :-
     /*
     There are 5 houses in a row, each a different color.
@@ -72,3 +73,20 @@ solve(Houses) :-
     % Who owns the zebra?
     % Tells the solver there exists a house with a zebra.
     member(house(_,_,zebra,_,_), Houses).
+
+% Shows solution in a more clean-looking format
+report(Houses) :-
+    % Formatting: ~n = newline, ~w = print next item from list, ~t~x = pad with spaces up to column x. This line just prints the header for the result.
+    format("~n~w~t~8||  ~w~t~24||  ~w~t~35||  ~w~t~51||  ~w~n", ["Color", "Nationality", "Pet", "Drink", "Cigarette"]),
+
+    % Print horizontal line
+    format("-------------------------------------------------------------------~n~n"),
+
+    % Iterates through every item in Houses, assigning a variable name to each attribute of a house.
+    forall(member(house(Col, Nat, Pet, Dri, Cig), Houses),
+
+        % Same formatting as header, prints each specific attribute in corresponding column.
+        format("~w~t~8||  ~w~t~24||  ~w~t~35||  ~w~t~51||  ~w~n~n", [Col, Nat, Pet, Dri, Cig])),
+    
+    % Print horizontal line
+    format("-------------------------------------------------------------------~n").
