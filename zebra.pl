@@ -1,3 +1,4 @@
+% Template for a house with no attributes filled in
 emptyHouse(house(_,_,_,_,_)).
 
 % Helper function which determines whether list items A and B are in consecutive left-to-right order A, B
